@@ -6,6 +6,8 @@
 Debug\net8.0
 # Prerequisites
 *.d
+*.obj
+bin/
 
 # Object files
 *.o
