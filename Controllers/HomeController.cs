@@ -1,10 +1,10 @@
-using Azure;
-using GunRangeV3.Models;
+
+using GUN_RANGE_APP_V5.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 
-namespace GunRangeV3.Controllers
+namespace GUN_RANGE_APP_V5.Controllers
 {
     public class HomeController : Controller
     {

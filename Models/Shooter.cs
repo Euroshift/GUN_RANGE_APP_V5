@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace GunRangeV3.Models
+namespace GUN_RANGE_APP_V5.Models
 {
     public class Shooter
     {

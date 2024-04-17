@@ -1,6 +1,8 @@
 .bin
 .obj
 /Debug/
+/obj/
+.vs
 # Prerequisites
 *.d
 
