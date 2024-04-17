@@ -1,4 +1,4 @@
-namespace GUN_RANGE_APP_V5.Models
+namespace GunRangeV3.Models
 {
     public class ErrorViewModel
     {

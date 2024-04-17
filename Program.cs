@@ -1,7 +1,10 @@
+using GunRangeV3.Models;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddScoped<AppDbContext>();
 
 var app = builder.Build();
 
