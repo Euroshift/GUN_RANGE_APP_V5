@@ -3,6 +3,7 @@
 /Debug/
 /obj/
 .vs
+Debug\net8.0
 # Prerequisites
 *.d
 
