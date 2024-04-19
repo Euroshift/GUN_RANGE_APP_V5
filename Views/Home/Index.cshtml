@@ -6,6 +6,7 @@
 
     <thead>
         <tr>
+            <th>Edit</th>
             <th>Name</th>
             <th>CID</th>
             <th>Team</th>
@@ -19,13 +20,15 @@
             <th>Officer ID</th>
             <th>Issued Equipment</th>
             <th>Last Range Date</th>
-            <th>Edit</th>
+            
         </tr>
     </thead>
     <tbody>
         @foreach (var shooter in Model.Shooters)
         {
             <tr>
+
+                <td><button class="edit-button" data-id="@shooter.Id">Edit</button></td>
                 <td>@shooter.Name</td>
                 <td>@shooter.CID</td>
                 <td>@shooter.Team</td>
@@ -39,8 +42,6 @@
                 <td>@shooter.OfficerId</td>
                 <td>@shooter.IssuedEquipment</td>
                 <td>@shooter.LastRangeDate</td>
-@*                 <td><button shooter-data.Id="@shooter.Id" class="edit-button">Edit</button></td>
- *@                <td><button class="edit-button" data-id="@shooter.Id">Edit</button></td>
                 <input type="hidden" asp-for="@shooter.Id" />
             </tr>
         }
@@ -50,6 +51,8 @@
     <tfoot>
 
         <tr>
+            <th>Edit</th>
+
             <th>Name</th>
             <th>CID</th>
             <th>Team</th>
@@ -63,7 +66,6 @@
             <th>Officer ID</th>
             <th>Issued Equipment</th>
             <th>Last Range Date</th>
-            <th>Edit</th>
         </tr>
 
     </tfoot>
