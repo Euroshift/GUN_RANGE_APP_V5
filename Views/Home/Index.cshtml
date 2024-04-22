@@ -110,19 +110,18 @@
 </div>
 
 <script>
-    // $(document).ready(function () {
-    //     console.log("ready!");
-    //     var table = new DataTable('#shooterData');
+    $(document).ready(function () {
+        console.log("ready!");
+        var table = new DataTable('#shooterData');
 
-    //     });
-        // extra features below this line - - -
+    });
+    // extra features below this line - - -
     $('#shooterData').DataTable({
         "scrollX": true,
         "scrollY": "500px",
         "scrollCollapse": true,
         "paging": false
     });
-
 
     $('.edit-button').on('click', function () {
         var shooterId = $(this).data('id');
