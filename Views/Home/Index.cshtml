@@ -1,31 +1,34 @@
 ﻿@model GUN_RANGE_APP_V5.Models.ShooterListViewModel
 
-
+<link rel="stylesheet" href="~/css/modal.css" asp-append-version="true" />
 
 <table id="shooterData" class="table table-striped table-sm cell-border hover" style="width:100%; margin-right: 20px;">
 
-    <thead>
+    <thead style="font-size: 15px;">
         <tr>
+            <th>Edit</th>
             <th>Name</th>
             <th>CID</th>
             <th>Team</th>
             <th>Division</th>
-            <th>Gun Information</th>
-            <th>Qualifications/Training</th>
-            <th>Additional Training Type</th>
-            <th>Additional Training Hours</th>
+            <th>Gun Info</th>
+            <th>Qual.Training</th>
+            <th>Add. Training Type</th>
+            <th>Add. Training Hours</th>
             <th>Retired</th>
             <th>Inactive</th>
             <th>Officer ID</th>
             <th>Issued Equipment</th>
             <th>Last Range Date</th>
-            <th>Edit</th>
+            
         </tr>
     </thead>
     <tbody>
         @foreach (var shooter in Model.Shooters)
         {
             <tr>
+
+                <td><button class="edit-button btn btn-success" data-id="@shooter.Id">Edit</button></td>
                 <td>@shooter.Name</td>
                 <td>@shooter.CID</td>
                 <td>@shooter.Team</td>
@@ -39,8 +42,6 @@
                 <td>@shooter.OfficerId</td>
                 <td>@shooter.IssuedEquipment</td>
                 <td>@shooter.LastRangeDate</td>
-@*                 <td><button shooter-data.Id="@shooter.Id" class="edit-button">Edit</button></td>
- *@                <td><button class="edit-button" data-id="@shooter.Id">Edit</button></td>
                 <input type="hidden" asp-for="@shooter.Id" />
             </tr>
         }
@@ -49,7 +50,9 @@
 
     <tfoot>
 
-        <tr>
+@*         <tr>
+            <th>Edit</th>
+
             <th>Name</th>
             <th>CID</th>
             <th>Team</th>
@@ -63,35 +66,109 @@
             <th>Officer ID</th>
             <th>Issued Equipment</th>
             <th>Last Range Date</th>
-            <th>Edit</th>
-        </tr>
+        </tr> *@
 
     </tfoot>
 
 </table>
 <!-- Modal -->
-<div id="editModal" class="modal">
-    <div class="modal-content">
-        <span class="close">&times;</span>
-        <!-- Your update form -->
-        <div id="updateForm">
-            <input type="hidden" id="shooterId"><br>
-            <input type="text" id="shooterName" placeholder="Name"><br>
-            <input type="text" id="shooterCID" placeholder="CID"><br>
-            <input type="text" id="shooterTeam" placeholder="Team"><br>
-            <input type="text" id="shooterDivision" placeholder="Division"><br>
-            <input type="text" id="shooterGunInformation" placeholder="GunInformation"><br>
-            <input type="text" id="shooterQualificationsTraining" placeholder="QualificationsTraining"><br>
-            <input type="text" id="shooterAdditionalTrainingType" placeholder="AdditionalTrainingType"><br>
-            <input type="text" id="shooterAdditionalTrainingHours" placeholder="AdditionalTrainingHours"><br>
-            <input type="text" id="shooterisRetired" placeholder="Retired"><br>
-            <input type="text" id="shooterisActive" placeholder="Inactive"><br>
-            <input type="text" id="shooterOfficerId" placeholder="OfficerId"><br>
-            <input type="text" id="shooterIssuedEquipment" placeholder="IssuedEquipment"><br>
-            <input type="text" id="shooterLastRangeDate" placeholder="LastRangeDate"><br>
+<div id="editModal" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" style="margin-right: 10px;">Edit Shooter</h5>
+                <button type="button" class="close btn btn-danger cancel-button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
 
-            <!-- Add more input fields as needed -->
-            <button id="updateButton">Update Shooter</button>
+            </div>
+            <div class="modal-body">
+                <!-- Your update form -->
+                <div id="updateForm">
+                    <input type="hidden" id="shooterId">
+                    <div class="row">
+                        <div class="col">
+                            <label for="shooterName">Name</label>
+                            <input type="text" id="shooterName" class="form-control" placeholder="Name">
+                        </div>
+                        <div class="col">
+                            <label for="shooterCID">CID</label>
+                            <input type="text" id="shooterCID" class="form-control" placeholder="CID">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <label for="shooterTeam">Team</label>
+
+                            <input type="text" id="shooterTeam" class="form-control" placeholder="Team">
+                        </div>
+                        <div class="col">
+                            <label for="shooterDivision">Division</label>
+
+                            <input type="text" id="shooterDivision" class="form-control" placeholder="Division">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <label for="shooterGunInformation">Gun Information</label>
+
+                            <input type="text" id="shooterGunInformation" class="form-control" placeholder="GunInformation">
+                        </div>
+                        <div class="col">
+                            <label for="shooterQualificationsTraining">Qualifications/Training</label>
+
+                            <input type="text" id="shooterQualificationsTraining" class="form-control" placeholder="QualificationsTraining">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <label for="shooterAdditionalTrainingType">Additional Training Type</label>
+
+                            <input type="text" id="shooterAdditionalTrainingType" class="form-control" placeholder="AdditionalTrainingType">
+                        </div>
+                        <div class="col">
+                            <label for="shooterAdditionalTrainingHours">Additional Training Hours</label>
+
+                            <input type="text" id="shooterAdditionalTrainingHours" class="form-control" placeholder="AdditionalTrainingHours">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <label for="shooterisRetired">Retired</label>
+
+                            <input type="text" id="shooterisRetired" class="form-control" placeholder="Retired">
+                        </div>
+                        <div class="col">
+                            <label for="shooterisActive">Inactive</label>
+
+                            <input type="text" id="shooterisActive" class="form-control" placeholder="Inactive">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <label for="shooterOfficerId">Officer ID</label>
+
+                            <input type="text" id="shooterOfficerId" class="form-control" placeholder="OfficerId">
+                        </div>
+                        <div class="col">
+                            <label for="shooterIssuedEquipment">Issued Equipment</label>
+
+                            <input type="text" id="shooterIssuedEquipment" class="form-control" placeholder="IssuedEquipment">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <label for="shooterLastRangeDate">Last Range Date</label>
+
+                            <input type="date" id="shooterLastRangeDate" class="form-control" placeholder="LastRangeDate">
+                        </div>
+                        <!-- Add more input fields here if needed -->
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="updateButton" class="btn btn-primary">Update Shooter</button>
+            </div>
         </div>
     </div>
 </div>
@@ -101,10 +178,14 @@
         console.log("ready!");
         var table = new DataTable('#shooterData');
 
-        });
-        // extra features below this line - - -
-
-
+    });
+    // extra features below this line - - -
+    $('#shooterData').DataTable({
+        "scrollX": true,
+        "scrollY": "500px",
+        "scrollCollapse": true,
+        "paging": false
+    });
 
     $('.edit-button').on('click', function () {
         var shooterId = $(this).data('id');
@@ -206,7 +287,9 @@
             success: function (response) {
                 console.log(response);
                 $('#editModal').hide();
-                // Refresh the page or update the table if needed
+      
+                location.reload(); // Reload the page after successful update
+
             },
             error: function (xhr, status, error) {
                 console.error(xhr.responseText);
