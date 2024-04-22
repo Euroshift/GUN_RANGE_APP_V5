@@ -1,0 +1,17 @@
+﻿.modal-content {
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background color */
+    backdrop-filter: blur(10px); /* Blur effect */
+    color: white; /* White text */
+    border: 2px solid #444; /* Darker border */
+    border-radius: 10px; /* Rounded corners */
+}
+
+.modal-header {
+    border-bottom: 2px solid #444; /* Darker border for header */
+}
+
+.form-control {
+    background-color: #fffacc; /* Light yellow background for input fields */
+    border: 2px solid #666; /* Darker border for input fields */
+}
+

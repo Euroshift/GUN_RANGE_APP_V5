@@ -1,6 +1,6 @@
 ﻿@model GUN_RANGE_APP_V5.Models.ShooterListViewModel
 
-
+<link rel="stylesheet" href="~/css/modal.css" asp-append-version="true" />
 
 <table id="shooterData" class="table table-striped table-sm cell-border hover" style="width:100%; margin-right: 20px;">
 
@@ -83,61 +83,85 @@
             </div>
             <div class="modal-body">
                 <!-- Your update form -->
-                <div id="updateForm">
+                <div id="updateForm" class="row">
                     <input type="hidden" id="shooterId">
-                    <div class="row">
-                        <div class="col">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="shooterName">Name</label>
                             <input type="text" id="shooterName" class="form-control" placeholder="Name">
                         </div>
-                        <div class="col">
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="shooterCID">CID</label>
                             <input type="text" id="shooterCID" class="form-control" placeholder="CID">
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="shooterTeam">Team</label>
                             <input type="text" id="shooterTeam" class="form-control" placeholder="Team">
                         </div>
-                        <div class="col">
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="shooterDivision">Division</label>
                             <input type="text" id="shooterDivision" class="form-control" placeholder="Division">
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col">
-                            <input type="text" id="shooterGunInformation" class="form-control" placeholder="GunInformation">
-                        </div>
-                        <div class="col">
-                            <input type="text" id="shooterQualificationsTraining" class="form-control" placeholder="QualificationsTraining">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="shooterGunInformation">Gun Information</label>
+                            <input type="text" id="shooterGunInformation" class="form-control" placeholder="Gun Information">
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col">
-                            <input type="text" id="shooterAdditionalTrainingType" class="form-control" placeholder="AdditionalTrainingType">
-                        </div>
-                        <div class="col">
-                            <input type="text" id="shooterAdditionalTrainingHours" class="form-control" placeholder="AdditionalTrainingHours">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="shooterQualificationsTraining">Qualifications/Training</label>
+                            <input type="text" id="shooterQualificationsTraining" class="form-control" placeholder="Qualifications/Training">
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="shooterAdditionalTrainingType">Additional Training Type</label>
+                            <input type="text" id="shooterAdditionalTrainingType" class="form-control" placeholder="Additional Training Type">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="shooterAdditionalTrainingHours">Additional Training Hours</label>
+                            <input type="text" id="shooterAdditionalTrainingHours" class="form-control" placeholder="Additional Training Hours">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="shooterisRetired">Retired</label>
                             <input type="text" id="shooterisRetired" class="form-control" placeholder="Retired">
                         </div>
-                        <div class="col">
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="shooterisActive">Inactive</label>
                             <input type="text" id="shooterisActive" class="form-control" placeholder="Inactive">
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col">
-                            <input type="text" id="shooterOfficerId" class="form-control" placeholder="OfficerId">
-                        </div>
-                        <div class="col">
-                            <input type="text" id="shooterIssuedEquipment" class="form-control" placeholder="IssuedEquipment">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="shooterOfficerId">Officer ID</label>
+                            <input type="text" id="shooterOfficerId" class="form-control" placeholder="Officer ID">
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col">
-                            <input type="text" id="shooterLastRangeDate" class="form-control" placeholder="LastRangeDate">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="shooterIssuedEquipment">Issued Equipment</label>
+                            <input type="text" id="shooterIssuedEquipment" class="form-control" placeholder="Issued Equipment">
                         </div>
-                        <!-- Add more input fields here if needed -->
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="shooterLastRangeDate">Last Range Date</label>
+                            <input type="date" id="shooterLastRangeDate" class="form-control" placeholder="Last Range Date">
+                        </div>
                     </div>
                 </div>
             </div>
