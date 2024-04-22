@@ -134,16 +134,21 @@
                     </div>
                     <div class="row">
                         <div class="col">
-                            <label for="shooterisRetired">Retired</label>
+                            <label>Retired</label><br>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" name="shooterisRetired" id="retiredYes" value="Yes">
+                                <label class="form-check-label" for="retiredYes">Yes</label>
+                            </div>
 
-                            <input type="text" id="shooterisRetired" class="form-control" placeholder="Retired">
                         </div>
                         <div class="col">
-                            <label for="shooterisActive">Inactive</label>
-
-                            <input type="text" id="shooterisActive" class="form-control" placeholder="Inactive">
+                            <label>Inactive</label><br>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" name="shooterisActive" id="inactiveYes" value="Yes">
+                                <label class="form-check-label" for="inactiveYes">Yes</label>
+                            </div>
                         </div>
-                    </div>
+                    </div>                   
                     <div class="row">
                         <div class="col">
                             <label for="shooterOfficerId">Officer ID</label>
@@ -226,9 +231,7 @@
 
 
     $('#updateButton').on('click', function () {
-      
 
-  
         var id = $('#shooterId').val(); // Include shooter ID for identification <hidden value>
         var name = $('#shooterName').val();
         var cid = $('#shooterCID').val();
@@ -238,8 +241,8 @@
         var qualificationstraining = $('#shooterQualificationsTraining').val();
         var additionaltrainingtype = $('#shooterAdditionalTrainingType').val();
         var additionaltraininghours = $('#shooterAdditionalTrainingHours').val();
-        var retired = $('#shooterisRetired').val();
-        var inactive = $('#shooterisActive').val();
+        var retired = $('#retiredYes').is(':checked'); // Check if the retired checkbox is checked
+        var inactive = $('#inactiveYes').is(':checked');
         var officerid = $('#shooterOfficerId').val();
         var issuedequipment = $('#shooterIssuedEquipment').val();
         var lastrangedate = $('#shooterLastRangeDate').val();

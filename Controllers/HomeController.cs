@@ -48,8 +48,8 @@ namespace GUN_RANGE_APP_V5.Controllers
                         upShooter.QualificationsTraining = shooterQualificationsTraining;
                         upShooter.AdditionalTrainingType = shooterAdditionalTrainingType;
                         upShooter.AdditionalTrainingHours = shooterAdditionalTrainingHours;
-                        upShooter.IsRetired = shooterisRetired;
-                        upShooter.IsActive = shooterisActive;
+                  upShooter.IsRetired = shooterisRetired;
+                 upShooter.IsActive = shooterisActive;
                         upShooter.OfficerId = shooterOfficerId;
                         upShooter.IssuedEquipment = shooterIssuedEquipment;
                         upShooter.LastRangeDate = shooterLastDateRange;
