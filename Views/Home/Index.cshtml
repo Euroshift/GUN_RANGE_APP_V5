@@ -28,7 +28,7 @@
         {
             <tr>
 
-                <td><button class="edit-button" data-id="@shooter.Id">Edit</button></td>
+                <td><button class="edit-button btn btn-success" data-id="@shooter.Id">Edit</button></td>
                 <td>@shooter.Name</td>
                 <td>@shooter.CID</td>
                 <td>@shooter.Team</td>
@@ -286,7 +286,9 @@
             success: function (response) {
                 console.log(response);
                 $('#editModal').hide();
-                // Refresh the page or update the table if needed
+      
+                location.reload(); // Reload the page after successful update
+
             },
             error: function (xhr, status, error) {
                 console.error(xhr.responseText);
