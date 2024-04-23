@@ -64,6 +64,8 @@
 
 </table>
 
+ <button id="addNewShooterButton" class="btn btn-primary">Add New Shooter</button>
+
 <!-- Modal -->
 <div id="editModal" class="modal" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
@@ -170,17 +172,17 @@
         </div>
     </div>
 </div>
-<button id="addNewShooterButton" class="btn btn-primary">Add New Shooter</button>
-
+@* <button id="addNewShooterButton" class="btn btn-primary">Add New Shooter</button>
+ *@
 
 <!-- Modal for Adding a New Shooter -->
 <div id="addShooterModal" class="modal" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" style="margin-right: 10px;">Add Shooter</h5>
+                <h5 class="modal-title" style="margin-right: 30px;">Add Shooter</h5>
                 <button type="button" class="close btn btn-danger cancel-button" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
+                    Cancel Add
                 </button>
 
             </div>
@@ -274,7 +276,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button id="saveNewShooterButton" class="btn btn-primary">Save New Shooter Test</button>
+                <button id="saveNewShooterButton" class="btn btn-primary">Save New Shooter</button>
             </div>
         </div>
     </div>
@@ -328,6 +330,35 @@
     $('#saveNewShooterButton').on('click', function () {
         console.log('Save New Shooter Button clicked');
 
+        var requiredFields = [
+        $('#addShooterName'),
+        $('#addShooterCID'),
+        $('#addShooterTeam'),
+        $('#addShooterDivision'),
+        $('#addShooterGunInformation'),
+        $('#addShooterQualificationsTraining'),
+        $('#addShooterAdditionalTrainingType'),
+        $('#addShooterAdditionalTrainingHours'),
+        $('#addShooterIsRetired'),
+        $('#addShooterIsActive'),
+        $('#addShooterOfficerId'),
+        $('#addShooterIssuedEquipment'),
+        $('#addShooterLastRangeDate'),
+        ]
+        var allFieldsFilled = true;
+
+        requiredFields.forEach(function (field) {
+            if (!field.val()) {
+                allFieldsFilled = false;
+                return false; // Exit loop early if any field is empty
+            }
+        });
+
+        if (!allFieldsFilled) {
+            // Show an alert or a message to notify the user
+            alert('All fields must be filled before saving.');
+            return; // Exit function early if any field is empty
+        }
         // var id = $('#addShooterId').val(); // Include shooter ID for identification <hidden value>
         var name = $('#addShooterName').val();
         var cid = $('#addShooterCID').val();
@@ -384,7 +415,13 @@
             },
             success: function (response) {
                 // Handle success response
+
                 console.log(response);
+
+                $('#addShooterModal').hide();
+
+                location.reload(); // Reload the page after successful update
+
                 // Optionally, close the modal or show a success message
             },
             error: function (xhr, status, error) {
@@ -512,18 +549,33 @@
 
     // //----
 
-// Get the modal
-    var modal = document.getElementById('editModal');
-    var addModal = document.getElementById('addShooterModal');
+// // Get the modal
+//     var modal = document.getElementById('editModal');
+//     var addModal = document.getElementById('addShooterModal');
 
   
- // Get the <span> element that closes the modal
-    var span = document.getElementsByClassName("close")[0];     
+//  // Get the <span> element that closes the modal
+//     var span = document.getElementsByClassName("close")[0];     
 
-// When the user clicks on <span> (x), close the modal
-    span.onclick = function () {
-        modal.style.display = "none";
+// // When the user clicks on <span> (x), close the modal
+//     span.onclick = function () {
+//         modal.style.display = "none";
+//     };
+
+
+    var closeEditModalButton = editModal.querySelector('.close');
+
+    // Get the close button for addShooterModal
+    var closeAddShooterModalButton = addShooterModal.querySelector('.close');
+
+    // When the user clicks on the close button in editModal, close the modal
+    closeEditModalButton.onclick = function () {
+        editModal.style.display = "none";
     };
 
+    // When the user clicks on the close button in addShooterModal, close the modal
+    closeAddShooterModalButton.onclick = function () {
+        addShooterModal.style.display = "none";
+    };
         </script>
       
