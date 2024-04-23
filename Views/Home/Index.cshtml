@@ -1,7 +1,17 @@
 ﻿@model GUN_RANGE_APP_V5.Models.ShooterListViewModel
 
 <link rel="stylesheet" href="~/css/modal.css" asp-append-version="true" />
+<style>
+    body {
+  font: 90%/1.45em "Helvetica Neue", HelveticaNeue, Verdana, Arial, Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
+  color: white;
+  background-color: black;
+}
 
+
+</style>
 <table id="shooterData" class="table table-striped table-sm cell-border hover" style="width:100%; margin-right: 20px;">
 
     <thead style="font-size: 15px;">
@@ -50,35 +60,20 @@
 
     <tfoot>
 
-@*         <tr>
-            <th>Edit</th>
-
-            <th>Name</th>
-            <th>CID</th>
-            <th>Team</th>
-            <th>Division</th>
-            <th>Gun Information</th>
-            <th>Qualifications/Training</th>
-            <th>Additional Training Type</th>
-            <th>Additional Training Hours</th>
-            <th>Retired</th>
-            <th>Inactive</th>
-            <th>Officer ID</th>
-            <th>Issued Equipment</th>
-            <th>Last Range Date</th>
-        </tr> *@
-
     </tfoot>
 
 </table>
+
+ <button id="addNewShooterButton" class="btn btn-primary">Add New Shooter</button>
+
 <!-- Modal -->
 <div id="editModal" class="modal" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" style="margin-right: 10px;">Edit Shooter</h5>
+                <h5 class="modal-title" style="margin-right: 220px;">Edit Shooter</h5>
                 <button type="button" class="close btn btn-danger cancel-button" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
+                    Cancel Edit
                 </button>
 
             </div>
@@ -134,16 +129,21 @@
                     </div>
                     <div class="row">
                         <div class="col">
-                            <label for="shooterisRetired">Retired</label>
+                            <label>Retired</label><br>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" name="shooterisRetired" id="retiredYes" value="Yes">
+                                <label class="form-check-label" for="retiredYes">Yes</label>
+                            </div>
 
-                            <input type="text" id="shooterisRetired" class="form-control" placeholder="Retired">
                         </div>
                         <div class="col">
-                            <label for="shooterisActive">Inactive</label>
-
-                            <input type="text" id="shooterisActive" class="form-control" placeholder="Inactive">
+                            <label>Inactive</label><br>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" name="shooterisActive" id="inactiveYes" value="Yes">
+                                <label class="form-check-label" for="inactiveYes">Yes</label>
+                            </div>
                         </div>
-                    </div>
+                    </div>                   
                     <div class="row">
                         <div class="col">
                             <label for="shooterOfficerId">Officer ID</label>
@@ -172,6 +172,116 @@
         </div>
     </div>
 </div>
+@* <button id="addNewShooterButton" class="btn btn-primary">Add New Shooter</button>
+ *@
+
+<!-- Modal for Adding a New Shooter -->
+<div id="addShooterModal" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" style="margin-right: 220px;">Add Shooter</h5>
+                <button type="button" class="close btn btn-danger cancel-button" data-dismiss="modal" aria-label="Close">
+                    Cancel Add
+                </button>
+
+            </div>
+            <div class="modal-body">
+                <!-- Your update form -->
+                <div id="updateForm">
+                    <input type="hidden" id="addShooterId">
+                    <div class="row">
+                        <div class="col">
+                            <label for="shooterName">Name</label>
+                            <input type="text" id="addShooterName" class="form-control" placeholder="Name">
+                        </div>
+                        <div class="col">
+                            <label for="shooterCID">CID</label>
+                            <input type="text" id="addShooterCID" class="form-control" placeholder="CID">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <label for="shooterTeam">Team</label>
+
+                            <input type="text" id="addShooterTeam" class="form-control" placeholder="Team">
+                        </div>
+                        <div class="col">
+                            <label for="shooterDivision">Division</label>
+
+                            <input type="text" id="addShooterDivision" class="form-control" placeholder="Division">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <label for="shooterGunInformation">Gun Information</label>
+
+                            <input type="text" id="addShooterGunInformation" class="form-control" placeholder="GunInformation">
+                        </div>
+                        <div class="col">
+                            <label for="shooterQualificationsTraining">Qualifications/Training</label>
+
+                            <input type="text" id="addShooterQualificationsTraining" class="form-control" placeholder="QualificationsTraining">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <label for="shooterAdditionalTrainingType">Additional Training Type</label>
+
+                            <input type="text" id="addShooterAdditionalTrainingType" class="form-control" placeholder="AdditionalTrainingType">
+                        </div>
+                        <div class="col">
+                            <label for="shooterAdditionalTrainingHours">Additional Training Hours</label>
+
+                            <input type="text" id="addShooterAdditionalTrainingHours" class="form-control" placeholder="AdditionalTrainingHours">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <label>Retired</label><br>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" name="addShooterIsRetired" id="ietiredYes" value="Yes">
+                                <label class="form-check-label" for="retiredYes">Yes</label>
+                            </div>
+
+                        </div>
+                        <div class="col">
+                            <label>Inactive</label><br>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" name="addShooterIsActive" id="inactiveYes" value="Yes">
+                                <label class="form-check-label" for="inactiveYes">Yes</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <label for="shooterOfficerId">Officer ID</label>
+
+                            <input type="text" id="addShooterOfficerId" class="form-control" placeholder="OfficerId">
+                        </div>
+                        <div class="col">
+                            <label for="shooterIssuedEquipment">Issued Equipment</label>
+
+                            <input type="text" id="addShooterIssuedEquipment" class="form-control" placeholder="IssuedEquipment">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <label for="shooterLastRangeDate">Last Range Date</label>
+
+                            <input type="date" id="addShooterLastRangeDate" class="form-control" placeholder="LastRangeDate">
+                        </div>
+                        <!-- Add more input fields here if needed -->
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="saveNewShooterButton" class="btn btn-primary">Save New Shooter</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <script>
     $(document).ready(function () {
@@ -179,13 +289,155 @@
         var table = new DataTable('#shooterData');
 
     });
+
     // extra features below this line - - -
     $('#shooterData').DataTable({
         "scrollX": true,
         "scrollY": "500px",
         "scrollCollapse": true,
-        "paging": false
+        "paging": false,
+
+      // Adjust opacity as needed
+
     });
+
+
+    $('#addNewShooterButton').on('click', function () {
+        // Clear input fields when opening the modal
+        $('#addShooterName').val('');
+        $('#addShooterCID').val('');
+        $('#addShooterTeam').val('');
+        $('#addShooterDivision').val('');
+        $('#addShooterGunInformation').val('');
+        $('#addShooterQualificationsTraining').val('');
+        $('#addShooterAdditionalTrainingType').val('');
+        $('#addShooterAdditionalTrainingHours').val('');
+        $('#addShooterIsRetired').val('');
+        $('#addShooterIsActive').val('');
+        $('#addShooterOfficerId').val('');
+        $('#addShooterIssuedEquipment').val('');
+        $('#addShooterLastRangeDate').val('');
+
+        // Show the "Add Shooter" modal
+        $('#addShooterModal').show();
+
+    });
+
+
+    // Event handler for the "Save New Shooter" button click
+
+
+    $('#saveNewShooterButton').on('click', function () {
+        console.log('Save New Shooter Button clicked');
+
+        var requiredFields = [
+        $('#addShooterName'),
+        $('#addShooterCID'),
+        $('#addShooterTeam'),
+        $('#addShooterDivision'),
+        $('#addShooterGunInformation'),
+        $('#addShooterQualificationsTraining'),
+        $('#addShooterAdditionalTrainingType'),
+        $('#addShooterAdditionalTrainingHours'),
+        $('#addShooterIsRetired'),
+        $('#addShooterIsActive'),
+        $('#addShooterOfficerId'),
+        $('#addShooterIssuedEquipment'),
+        $('#addShooterLastRangeDate'),
+        ]
+        var allFieldsFilled = true;
+
+        requiredFields.forEach(function (field) {
+            if (!field.val()) {
+                allFieldsFilled = false;
+                return false; // Exit loop early if any field is empty
+            }
+        });
+
+        if (!allFieldsFilled) {
+            // Show an alert or a message to notify the user
+            alert('All fields must be filled before saving.');
+            return; // Exit function early if any field is empty
+        }
+        // var id = $('#addShooterId').val(); // Include shooter ID for identification <hidden value>
+        var name = $('#addShooterName').val();
+        var cid = $('#addShooterCID').val();
+        var team = $('#addShooterTeam').val();
+        var division = $('#addShooterDivision').val();
+        var guninformation = $('#addShooterGunInformation').val();
+        var qualificationstraining = $('#addShooterQualificationsTraining').val();
+        var additionaltrainingtype = $('#addShooterAdditionalTrainingType').val();
+        var additionaltraininghours = $('#addShooterAdditionalTrainingHours').val();
+        var retired = $('#retiredYes').is(':checked'); // Check if the retired checkbox is checked
+        var inactive = $('#inactiveYes').is(':checked');
+        var officerid = $('#addShooterOfficerId').val();
+        var issuedequipment = $('#addShooterIssuedEquipment').val();
+        var lastrangedate = $('#addShooterLastRangeDate').val();
+
+        // Include other fields as needed
+
+        //for debugging
+        console.log('Values to update shooter:', {
+            // shooterId: id,
+            name: name,
+            cid: cid,
+            team: team,
+            division: division,
+            guninformation: guninformation,
+            qualificationstraining: qualificationstraining,
+            additionaltrainingtype: additionaltrainingtype,
+            additionaltraininghours: additionaltraininghours,
+            retired: retired,
+            inactive: inactive,
+            officerid: officerid,
+            issuedequipment: issuedequipment,
+            lastrangedate: lastrangedate
+        });
+        $.ajax({
+            url: '/home/AddNewShooter',
+            type: 'POST',
+            data: {
+                // shooterId: id,
+                shooterName: name,
+                shooterCID: cid,
+                shooterTeam: team,
+                shooterDivision: division,
+                shooterGunInformation: guninformation,
+                shooterQualificationsTraining: qualificationstraining,
+                shooterAdditionalTrainingType: additionaltrainingtype,
+                shooterAdditionalTrainingHours: additionaltraininghours,
+                shooterIsRetired: retired,
+                shooterIsActive: inactive,
+                shooterOfficerId: officerid,
+                shooterIssuedEquipment: issuedequipment,
+                shooterLastRangeDate: lastrangedate
+
+            },
+            success: function (response) {
+                // Handle success response
+
+                console.log(response);
+
+                $('#addShooterModal').hide();
+
+                location.reload(); // Reload the page after successful update
+
+                // Optionally, close the modal or show a success message
+            },
+            error: function (xhr, status, error) {
+                // Handle error response
+                console.error(xhr.responseText);
+                // Optionally, show an error message
+            }
+        });
+
+      
+    });
+
+
+
+
+
 
     $('.edit-button').on('click', function () {
         var shooterId = $(this).data('id');
@@ -226,9 +478,7 @@
 
 
     $('#updateButton').on('click', function () {
-      
 
-  
         var id = $('#shooterId').val(); // Include shooter ID for identification <hidden value>
         var name = $('#shooterName').val();
         var cid = $('#shooterCID').val();
@@ -238,8 +488,8 @@
         var qualificationstraining = $('#shooterQualificationsTraining').val();
         var additionaltrainingtype = $('#shooterAdditionalTrainingType').val();
         var additionaltraininghours = $('#shooterAdditionalTrainingHours').val();
-        var retired = $('#shooterisRetired').val();
-        var inactive = $('#shooterisActive').val();
+        var retired = $('#retiredYes').is(':checked'); // Check if the retired checkbox is checked
+        var inactive = $('#inactiveYes').is(':checked');
         var officerid = $('#shooterOfficerId').val();
         var issuedequipment = $('#shooterIssuedEquipment').val();
         var lastrangedate = $('#shooterLastRangeDate').val();
@@ -299,15 +549,33 @@
 
     // //----
 
-// Get the modal
-    var modal = document.getElementById('editModal');
- // Get the <span> element that closes the modal
-    var span = document.getElementsByClassName("close")[0];     
-// When the user clicks on <span> (x), close the modal
-    span.onclick = function () {
-        modal.style.display = "none";
+// // Get the modal
+//     var modal = document.getElementById('editModal');
+//     var addModal = document.getElementById('addShooterModal');
+
+  
+//  // Get the <span> element that closes the modal
+//     var span = document.getElementsByClassName("close")[0];     
+
+// // When the user clicks on <span> (x), close the modal
+//     span.onclick = function () {
+//         modal.style.display = "none";
+//     };
+
+
+    var closeEditModalButton = editModal.querySelector('.close');
+
+    // Get the close button for addShooterModal
+    var closeAddShooterModalButton = addShooterModal.querySelector('.close');
+
+    // When the user clicks on the close button in editModal, close the modal
+    closeEditModalButton.onclick = function () {
+        editModal.style.display = "none";
     };
 
-
+    // When the user clicks on the close button in addShooterModal, close the modal
+    closeAddShooterModalButton.onclick = function () {
+        addShooterModal.style.display = "none";
+    };
         </script>
       

@@ -15,3 +15,16 @@
     border: 2px solid #666; /* Darker border for input fields */
 }
 
+.modal {
+    display: none;
+    position: fixed;
+    top: 59%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+    width: 80%; /* Adjust the width as needed */
+    max-width: 600px; /* Set a maximum width for the modal */
+    border-radius: 5px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}

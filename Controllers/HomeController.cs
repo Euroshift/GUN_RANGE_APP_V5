@@ -63,6 +63,55 @@ namespace GUN_RANGE_APP_V5.Controllers
                     }              
         }
 
+        [HttpPost]
+        public IActionResult AddNewShooter(string shooterName, string shooterCID, string shooterTeam, string shooterDivision, string shooterGunInformation,
+            string shooterQualificationsTraining, string shooterAdditionalTrainingType, int shooterAdditionalTrainingHours, bool shooterIsRetired, bool shooterIsActive,
+            string shooterOfficerId, string shooterIssuedEquipment, string shooterLastRangeDate)
+        {
+            try
+            {
+                // Create a new Shooter object and populate its properties
+                var newShooter = new Shooter
+                {
+                    // Generate a new ID for the shooter (assuming the ID is an auto-increment primary key in the database)
+                    // You can adjust this part based on your database configuration
+                    // For databases like SQL Server, IDENTITY column will auto-generate IDs
+                    // For other databases, you may need to implement a mechanism to generate unique IDs
+                    // ID = <Generated ID>,
+                    Name = shooterName,
+                    CID = shooterCID,
+                    Team = shooterTeam,
+                    Division = shooterDivision,
+                    GunInformation = shooterGunInformation,
+                    QualificationsTraining = shooterQualificationsTraining,
+                    AdditionalTrainingType = shooterAdditionalTrainingType,
+                    AdditionalTrainingHours = shooterAdditionalTrainingHours,
+                    IsRetired = shooterIsRetired,
+                    IsActive = shooterIsActive,
+                    OfficerId = shooterOfficerId,
+                    IssuedEquipment = shooterIssuedEquipment,
+                    LastRangeDate = shooterLastRangeDate
+                    // Add other properties as needed
+                };
+
+                // Add the new shooter to the database
+                _dbContext.Shooters.Add(newShooter);
+                _dbContext.SaveChanges();
+
+                return Json(new { success = true, message = "Shooter added successfully." });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = "Failed to add shooter. " + ex.Message });
+            }
+        }
+
+
+
+
+
+
+
         //[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         //public IActionResult Error()
         //{
