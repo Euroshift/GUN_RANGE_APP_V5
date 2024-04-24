@@ -11,6 +11,8 @@
     --bs-table-color: white;
     --bs-table-striped-color: #fff;
     border-collapse: collapse; /* Add this to collapse the border spacing */
+    border: 2px solid #ddd; /* Add a visible border to the table */
+
 }
 
     .table td, .table th {
