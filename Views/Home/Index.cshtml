@@ -10,7 +10,38 @@
   background-color: black;
 }
 
+    .table > :not(caption) > * > * {
+        padding: .5rem .5rem;
+        color: var(--bs-table-color-state, var(--bs-table-color-type, var(--bs-table-color)));
+        background-color: #363e65cc;
+        border-bottom-width: var(--bs-border-width);
+        box-shadow: inset 0 0 0 9999px var(--bs-table-bg-state, var(--bs-table-bg-type, var(--bs-table-accent-bg)));
+    }
 
+    .table {
+        --bs-table-bg: white;
+        --bs-table-color: white;
+        --bs-table-striped-color: #fff;
+        border-collapse: collapse; /* Add this to collapse the border spacing */
+
+
+    }
+
+        .table td, .table th {
+            font-weight: bold; /* Add bold font weight */
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Add shadow to text */
+            border: 1px solid #ddd; /* Add border to table cells */
+            vertical-align: top; /* Align content to the top */
+        }
+        /* Add border to table header */
+        .table th {
+            border: 1px solid #ddd; /* Add border to table header cells */
+            vertical-align: top; /* Align content to the top */
+        }
+
+            .table td + td, .table th + th {
+                border-left: 2px solid #ddd;
+            }
 </style>
 <table id="shooterData" class="table table-striped table-sm cell-border hover" style="width:100%; margin-right: 20px;">
 
