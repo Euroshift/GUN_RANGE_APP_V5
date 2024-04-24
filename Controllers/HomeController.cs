@@ -16,7 +16,7 @@ namespace GUN_RANGE_APP_V5.Controllers
         }
         public IActionResult Index()
         {
-            var shooters = _dbContext.Shooters.ToList(); 
+            var shooters = _dbContext.Shooters.ToList();
             var viewModel = new ShooterListViewModel
             {
                 Shooters = shooters
@@ -34,33 +34,33 @@ namespace GUN_RANGE_APP_V5.Controllers
 
         [HttpPost]
         public IActionResult UpdateShooter(int shooterId, string shooterName, string shooterCID, string shooterTeam, string shooterDivision, string shooterGunInformation,
-            string shooterQualificationsTraining, string shooterAdditionalTrainingType, int shooterAdditionalTrainingHours, bool shooterisRetired, bool shooterisActive, 
+            string shooterQualificationsTraining, string shooterAdditionalTrainingType, int shooterAdditionalTrainingHours, bool shooterisRetired, bool shooterisActive,
             string shooterOfficerId, string shooterIssuedEquipment, string shooterLastDateRange)
-        {   
-                    var upShooter = _dbContext.Shooters.Find(shooterId);
-                    if (upShooter != null)
-                    {
-                        upShooter.Name = shooterName;
-                        upShooter.CID = shooterCID;
-                        upShooter.Team = shooterTeam;
-                        upShooter.Division = shooterDivision;
-                        upShooter.GunInformation = shooterGunInformation;
-                        upShooter.QualificationsTraining = shooterQualificationsTraining;
-                        upShooter.AdditionalTrainingType = shooterAdditionalTrainingType;
-                        upShooter.AdditionalTrainingHours = shooterAdditionalTrainingHours;
-                        upShooter.IsRetired = shooterisRetired;
-                        upShooter.IsActive = shooterisActive;
-                        upShooter.OfficerId = shooterOfficerId;
-                        upShooter.IssuedEquipment = shooterIssuedEquipment;
-                        upShooter.LastRangeDate = shooterLastDateRange;
+        {
+            var upShooter = _dbContext.Shooters.Find(shooterId);
+            if (upShooter != null)
+            {
+                upShooter.Name = shooterName;
+                upShooter.CID = shooterCID;
+                upShooter.Team = shooterTeam;
+                upShooter.Division = shooterDivision;
+                upShooter.GunInformation = shooterGunInformation;
+                upShooter.QualificationsTraining = shooterQualificationsTraining;
+                upShooter.AdditionalTrainingType = shooterAdditionalTrainingType;
+                upShooter.AdditionalTrainingHours = shooterAdditionalTrainingHours;
+                upShooter.IsRetired = shooterisRetired;
+                upShooter.IsActive = shooterisActive;
+                upShooter.OfficerId = shooterOfficerId;
+                upShooter.IssuedEquipment = shooterIssuedEquipment;
+                upShooter.LastRangeDate = shooterLastDateRange;
 
-                        _dbContext.SaveChanges();
-                        return Json(new { success = true, message = "Shooter updated successfully." });
-                    }
-                    else
-                    {
-                        return Json(new { success = false, message = "Shooter not found." });
-                    }              
+                _dbContext.SaveChanges();
+                return Json(new { success = true, message = "Shooter updated successfully." });
+            }
+            else
+            {
+                return Json(new { success = false, message = "Shooter not found." });
+            }
         }
 
         [HttpPost]
@@ -108,6 +108,23 @@ namespace GUN_RANGE_APP_V5.Controllers
 
 
 
+        [HttpPost]
+        public IActionResult DeleteShooter(int shooterId)
+        {
+            var delShooter = _dbContext.Shooters.Find(shooterId);
+            if (delShooter != null)
+            {
+                _dbContext.Shooters.Remove(delShooter); // Remove the shooter from the DbSet
+
+
+                _dbContext.SaveChanges();
+                return Json(new { success = true, message = "Shooter DELETED successfully." });
+            }
+            else
+            {
+                return Json(new { success = false, message = "Shooter not found." });
+            }
+        }
 
 
 
