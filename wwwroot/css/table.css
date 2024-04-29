@@ -31,6 +31,12 @@
             border-left: 2px solid #ddd;
         }
 
+    h2 {
+        font-weight: bold; /* Add bold font weight */
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Add shadow to text */
+      
+        vertical-align: top; /* Align content to the top */
+    }
 .highlight-red {
     background-color: #ffcccc; /* Light red background */
     /* You can add more styling properties here to customize the appearance */
