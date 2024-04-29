@@ -24,6 +24,11 @@ namespace GUN_RANGE_APP_V5.Controllers
             return View(viewModel);
         }
 
+        public IActionResult Inventory()
+        {
+            // Your logic to retrieve inventory data and render the view goes here
+            return View();
+        }
         [HttpGet]
         public IActionResult GetShooter(int id)
         {
