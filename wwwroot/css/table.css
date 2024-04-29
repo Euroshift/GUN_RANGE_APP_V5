@@ -30,3 +30,8 @@
         .table td + td, .table th + th {
             border-left: 2px solid #ddd;
         }
+
+.highlight-red {
+    background-color: #ffcccc; /* Light red background */
+    /* You can add more styling properties here to customize the appearance */
+}

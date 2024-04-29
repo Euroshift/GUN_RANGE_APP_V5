@@ -11,6 +11,8 @@
         color: white;
         background-color: black;
     }
+
+
 </style>
 <table id="shooterData" class="table table-striped table-sm cell-border hover" style="width:100%; margin-right: 20px;">
 
@@ -320,6 +322,7 @@
         console.log("ready!");
         var table = new DataTable('#shooterData');
 
+
     });
 
     // extra features below this line - - -
@@ -328,6 +331,28 @@
         "scrollY": "500px",
         "scrollCollapse": true,
         "paging": false,
+        "createdRow": function (row, data, dataIndex) {
+            // Get the Last Range Date value from the row
+            var lastRangeDateString = data[13]; // Assuming LastRangeDate is in the 14th column (index 13)
+            console.log(lastRangeDateString);
+            // Parse the Last Range Date string to a Date object
+            var lastRangeDate = new Date(lastRangeDateString);
+            console.log("date object: ", lastRangeDate);
+            // Calculate the difference in milliseconds between currentDate and lastRangeDate
+            var currentDate = new Date();
+            console.log("currentdate: ", currentDate);
+            var timeDifference = currentDate - lastRangeDate;
+            console.log("timediff:", timeDifference);
+            // Convert milliseconds to days
+            var daysDifference = timeDifference / (1000 * 60 * 60 * 24);
+            console.log("daysDiff:", daysDifference);
+            // Check if Last Range Date is greater than 90 days
+            if (daysDifference > 90) {
+                console.log("Row should be HIGHLIGHTED.");
+                // If yes, add the CSS class to highlight the row
+                $(row).css("background-color", "rgba(255, 0, 0, 1)");
+            }
+        }
 
         // Adjust opacity as needed
 
