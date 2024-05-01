@@ -1,12 +1,12 @@
 ﻿namespace GUN_RANGE_APP_V5.Models
 {
-    public class InventoryViewModel
+    public class InventoryListViewModel
     {
-        public InventoryViewModel()
+        public InventoryListViewModel()
         {
-            InventoryItems = new List<Inventory>();
+            Inventories = new List<Inventory>();
         }
-        public List<Inventory> InventoryItems { get; set; }
+        public List<Inventory> Inventories { get; set; }
     }
 }
 

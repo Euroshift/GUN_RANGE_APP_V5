@@ -1,4 +1,4 @@
-﻿@* @model GUN_RANGE_APP_V5.Models.ShooterListViewModel
+﻿@model GUN_RANGE_APP_V5.Models.InventoryListViewModel
 <link rel="stylesheet" href="~/css/modal.css" asp-append-version="true" />
 <link rel="stylesheet" href="~/css/table.css" asp-append-version="true" />
 <h2>ADD NEW SHOOTER</h2>
@@ -28,18 +28,18 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var inventory in Model.Shooters)
+        @foreach (var inventory in Model.Inventories)
         {
             <tr>
 
-                <td><button class="edit-button btn btn-success" data-id="@shooter.Id">Edit</button></td>
-                <td>@shooter.Name</td>
-                <td>@shooter.OfficerId</td>
-                <td>@shooter.GunInformation</td>
-                <td>@shooter.AdditionalEquipment</td>
+                <td><button class="edit-button btn btn-success" data-id="@inventory.Id">Edit</button></td>
+                <td>@inventory.Name</td>
+                <td>@inventory.OfficerId</td>
+                <td>@inventory.GunInformation</td>
+                <td>@inventory.AdditionalEquipment</td>
 
-                <td><button class="delete-button btn btn-danger" data-id="@shooter.Id">Delete</button></td>
-                <input type="hidden" asp-for="@shooter.Id" />
+                <td><button class="delete-button btn btn-danger" data-id="@inventory.Id">Delete</button></td>
+                <input type="hidden" asp-for="@inventory.Id" />
             </tr>
         }
     </tbody>
@@ -71,4 +71,3 @@
 
         });
 </script>
- *@

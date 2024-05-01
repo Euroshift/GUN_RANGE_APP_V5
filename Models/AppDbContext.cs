@@ -17,6 +17,7 @@ namespace GUN_RANGE_APP_V5.Models
         }
 
         public DbSet<Shooter> Shooters {  get; set; } 
+        public DbSet<Inventory> Inventories {  get; set; } 
         //can I add extra lists here for the same DB?
     }
 }

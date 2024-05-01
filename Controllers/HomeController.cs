@@ -26,8 +26,12 @@ namespace GUN_RANGE_APP_V5.Controllers
 
         public IActionResult Inventory()
         {
-            // Your logic to retrieve inventory data and render the view goes here
-            return View();
+            var inventories = _dbContext.Inventories.ToList();
+            var viewInvModel = new InventoryListViewModel
+            {
+                Inventories = inventories
+            };
+            return View(viewInvModel);
         }
         [HttpGet]
         public IActionResult GetShooter(int id)
