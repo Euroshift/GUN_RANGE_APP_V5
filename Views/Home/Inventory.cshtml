@@ -1,7 +1,7 @@
 ﻿@model GUN_RANGE_APP_V5.Models.InventoryListViewModel
 <link rel="stylesheet" href="~/css/modal.css" asp-append-version="true" />
 <link rel="stylesheet" href="~/css/table.css" asp-append-version="true" />
-<h2>ADD NEW SHOOTER</h2>
+
 <style>
     body {
         font: 90%/1.45em "Helvetica Neue", HelveticaNeue, Verdana, Arial, Helvetica, sans-serif;
@@ -14,11 +14,12 @@
 </style>
 
 
-<h2>ADD NEW SHOOTER</h2>
-<table id="shooterData" class="table table-striped table-sm cell-border hover" style="width:100%; margin-right: 20px;">
+<h2>ISSUED EQUIPMENT</h2>
+<table id="inventoryData" class="table table-striped table-sm cell-border hover" style="width:100%; margin-right: 20px;">
 
     <thead style="font-size: 15px;">
         <tr>
+            <th>Edit</th>
             <th>Name</th>
             <th>Officer ID</th>
             <th>GunInformation</th>
@@ -37,11 +38,10 @@
                 <td>@inventory.OfficerId</td>
                 <td>@inventory.GunInformation</td>
                 <td>@inventory.AdditionalEquipment</td>
-
                 <td><button class="delete-button btn btn-danger" data-id="@inventory.Id">Delete</button></td>
                 <input type="hidden" asp-for="@inventory.Id" />
             </tr>
-        }
+        } 
     </tbody>
 
 
@@ -49,25 +49,181 @@
     </tfoot>
 
 
+    </table>
+    
+@*   MODALS - - -  *@
+
+
+@* DELETE MODAL - --  - - *@
+<div id="deleteModal" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" style="margin-right: 220px;">DELETE Equipment</h5>
+                <button type="button" class="close btn btn-danger cancel-button" data-dismiss="modal" aria-label="Close">
+                    Cancel DELETE
+                </button>
+
+            </div>
+            <div class="modal-body">
+
+
+                CONFIRM REMOVAL OF EQUIPMENT
+            </div>
+
+            <div class="modal-footer">
+                <button id="deleteYesButton" class="btn btn-primary">Confirm DELETE</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@* EDIT MODAL - - - -  *@
+<div id="editModal" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" style="margin-right: 220px;">Edit Shooter</h5>
+                <button type="button" class="close btn btn-danger cancel-button" data-dismiss="modal" aria-label="Close">
+                    Cancel Edit
+                </button>
+
+            </div>
+            <div class="modal-body">
+                <!-- Your update form -->
+                <div id="updateForm">
+                    <input type="hidden" id="shooterId">
+                    <div class="row">
+                        <div class="col">
+                            <label for="shooterName">Name</label>
+                            <input type="text" id="shooterName" class="form-control" placeholder="Name">
+                        </div>
+                        <div class="col">
+                            <label for="shooterCID">CID</label>
+                            <input type="text" id="shooterCID" class="form-control" placeholder="CID">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <label for="shooterTeam">Team</label>
+
+                            <input type="text" id="shooterTeam" class="form-control" placeholder="Team">
+                        </div>
+                        <div class="col">
+                            <label for="shooterDivision">Division</label>
+
+                            <input type="text" id="shooterDivision" class="form-control" placeholder="Division">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="updateButton" class="btn btn-primary">Update Shooter</button>
+            </div>
+        </div>
+    </div>
+</div>
 
     
     <script>
-        $(document).ready(function () {
-            console.log("ready!");
-            var table = new DataTable('#shooterData');
+    $(document).ready(function () {
+        console.log("ready!");
+        var table = new DataTable('#inventoryData');
 
 
-        });
+    });
 
-        // extra features below this line - - -
-        $('#shooterData').DataTable({
-            "scrollX": true,
-            "scrollY": "500px",
-            "scrollCollapse": true,
-            "paging": false
+    // extra features below this line - - -
+    $('#inventoryData').DataTable({
+        "scrollX": true,
+        "scrollY": "500px",
+        "scrollCollapse": true,
+        "paging": false,
+
+        // Adjust opacity as needed
+
+    });
+
+
+
+    // BUTTONS  -     ---           - - - - - - -
+
+    // DELETE BUTTON FUNCTIONALITY START > > >
+    $('.delete-button').on('click', function () {
+        var inventoryId = $(this).data('id');
+        console.log("inventoryId:", inventoryId);
+        $.ajax({
+            url: '/home/GetInventory',
+            type: 'GET',
+            data: { id: inventoryId },
+            success: function (response) {
+                console.log("Response:", response);
+
+                // Populate modal with shooter data
+                $('#inventoryId').val(response.id)
+
+                $('#inventoryName').val(response.name);
+                $('#inventoryOfficerId').val(response.officerid);
+                $('#inventoryGunInformation').val(response.guninformation);
+                $('#inventoryAdditionalEquipment').val(response.additionalequipment);
+
+
+                // Show the modal after populating data
+                $('#deleteModal').show();
+
+                // Logging the values (optional)
+
+            },
+            error: function (xhr, status, error) {
+                console.error(xhr.responseText);
             }
+        });
+    });
 
-            // Adjust opacity as needed
+    $('#deleteYesButton').on('click', function () {
+
+        var id = $('#inventoryId').val(); // Include shooter ID for identification <hidden value>
+        console.log("Inventory ID:", id);
+
+
+        //for debugging
+        console.log('Values to DELETE:', {
+            inventoryId: id,
 
         });
+
+        $.ajax({
+            url: '/home/DeleteInventory',
+            type: 'POST',
+            data: {
+                inventoryId: id,
+
+            },
+            success: function (response) {
+                console.log(response);
+                $('#deleteModal').hide();
+
+                // location.reload(); // Reload the page after successful update
+
+            },
+            error: function (xhr, status, error) {
+                console.error(xhr.responseText);
+            }
+        });
+    });
+
+    // DELETE BUTTON FUNCTIONALITY END > > >
+    var deleteModal = document.getElementById('deleteModal');
+    var closeDeleteModalButton = deleteModal.querySelector('.close');
+    // When the user clicks on the close button in editModal, close the modal
+    // closeEditModalButton.onclick = function () {
+    //     editModal.style.display = "none";
+    // };
+
+    closeDeleteModalButton.onclick = function () {
+        deleteModal.style.display = "none";
+    };
 </script>
+
+

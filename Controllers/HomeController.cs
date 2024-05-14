@@ -33,6 +33,15 @@ namespace GUN_RANGE_APP_V5.Controllers
             };
             return View(viewInvModel);
         }
+
+
+        [HttpGet]
+        public IActionResult GetInventory(int id)
+        {
+            var inventory = _dbContext.Inventories.FirstOrDefault(s => s.Id == id);
+            return Json(inventory);
+        }
+
         [HttpGet]
         public IActionResult GetShooter(int id)
         {
@@ -135,7 +144,23 @@ namespace GUN_RANGE_APP_V5.Controllers
             }
         }
 
+        [HttpPost]
+        public IActionResult DeleteInventory(int inventoryId)
+        {
+            var delInventory = _dbContext.Inventories.Find(inventoryId);
+            if (delInventory != null)
+            {
+                _dbContext.Inventories.Remove(delInventory); // Remove the shooter from the DbSet
 
+
+                _dbContext.SaveChanges();
+                return Json(new { success = true, message = "Shooter DELETED successfully." });
+            }
+            else
+            {
+                return Json(new { success = false, message = "Shooter not found." });
+            }
+        }
 
 
         //[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
