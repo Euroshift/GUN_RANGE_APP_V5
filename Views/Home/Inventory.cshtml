@@ -15,7 +15,7 @@
 
 
 <h2>ISSUED EQUIPMENT</h2>
-<table id="inventoryData" class="table table-striped table-sm cell-border hover" style="width:100%; margin-right: 20px;">
+<table id="inventoryData" class="table table-striped table-sm cell-border hover" style="width:100%;">
 
     <thead style="font-size: 15px;">
         <tr>
@@ -50,9 +50,60 @@
 
 
     </table>
+
+<button id="addNewInventoryButton" class="btn btn-primary" style="margin: -10px;">Add New Equipment</button>
+
     
 @*   MODALS - - -  *@
 
+@* ADD INVENTORY MODAL - - - - - - - *@
+
+<div id="addInventoryModal" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" style="margin-right: 220px;">Add Shooter</h5>
+                <button type="button" class="close btn btn-danger cancel-button" data-dismiss="modal" aria-label="Close">
+                    Cancel Add
+                </button>
+
+            </div>
+            <div class="modal-body">
+                <!-- Your update form -->
+                <div id="updateForm">
+                    <input type="hidden" id="addInventoryId">
+                    <div class="row">
+                        <div class="col">
+                            <label for="inventoryName">Name</label>
+                            <input type="text" id="addInventoryName" class="form-control" placeholder="Name">
+                        </div>
+                        <div class="col">
+                            <label for="inventoryOfficerId">Officer ID</label>
+                            <input type="text" id="addInventoryOfficerId" class="form-control" placeholder="OfficerID">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <label for="inventoryGunInformation">Gun Information</label>
+
+                            <input type="text" id="addInventoryGunInformation<" class="form-control" placeholder="GunInformation">
+                        </div>
+                        <div class="col">
+                            <label for="inventoryAdditionalEquipment">Additional Equipment</label>
+
+                            <input type="text" id="addInventoryAdditionalEquipment<" class="form-control" placeholder="AdditionalEquipment">
+                        </div>
+                    </div>
+                        <!-- Add more input fields here if needed -->
+                    
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="saveNewInventoryButton" class="btn btn-primary">Save New Equipment</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 @* DELETE MODAL - --  - - *@
 <div id="deleteModal" class="modal" tabindex="-1" role="dialog">
@@ -93,7 +144,7 @@
             <div class="modal-body">
                 <!-- Your update form -->
                 <div id="updateForm">
-                    <input type="hidden" id="shooterId">
+                    <input type="hidden" id="inventoryId">
                     <div class="row">
                         <div class="col">
                             <label for="shooterName">Name</label>
@@ -149,63 +200,128 @@
 
     // BUTTONS  -     ---           - - - - - - -
 
+    //ADD EQUIPMENT BUTTON
+    $('#addNewInventoryButton').on('click', function () {
+        // Clear input fields when opening the modal
+        $('#addInventoryName').val('');
+        $('#addInventoryGunInformation').val('');
+        $('#addInventoryOfficerId').val('');
+        $('#addInventoryAdditionalEquipment').val('');
+
+        // Show the "Add Shooter" modal
+        $('#addInventoryModal').show();
+
+    });
+
+    //SAVE NEW ADD BUTTON
+    // $('#saveNewShooterButton').on('click', function () {
+    //     console.log('Save New Shooter Button clicked');
+
+    //     var id = $('#addShooterId').val(); // Include shooter ID for identification <hidden value>
+    //     var name = $('#addShooterName').val();
+    //     var cid = $('#addShooterCID').val() || 'N/A';
+    //     var team = $('#addShooterTeam').val() || 'N/A';
+    //     var division = $('#addShooterDivision').val() || 'N/A';
+    //     var guninformation = $('#addShooterGunInformation').val() || 'N/A';
+    //     var qualificationstraining = $('#addShooterQualificationsTraining').val() || 'N/A';
+    //     var additionaltrainingtype = $('#addShooterAdditionalTrainingType').val() || 'N/A';
+    //     var additionaltraininghours = $('#addShooterAdditionalTrainingHours').val() || 'N/A';
+    //     var retired = $('#retiredYes').is(':checked'); // Check if the retired checkbox is checked
+    //     var inactive = $('#inactiveYes').is(':checked');
+    //     var officerid = $('#addShooterOfficerId').val() || 'N/A';
+    //     var issuedequipment = $('#addShooterIssuedEquipment').val() || 'N/A';
+    //     var lastrangedate = $('#addShooterLastRangeDate').val() || 'N/A';
+
+    //     // Include other fields as needed
+    //     if (!name) {
+    //         // Show an alert or a message to notify the user
+    //         alert('Name field must be filled before saving.');
+    //         return; // Exit function early if the Name field is empty
+    //     }
+    //     //for debugging
+    //     console.log('Values to update shooter:', {
+    //         // shooterId: id,
+    //         name: name,
+    //         cid: cid,
+    //         team: team,
+    //         division: division,
+    //         guninformation: guninformation,
+    //         qualificationstraining: qualificationstraining,
+    //         additionaltrainingtype: additionaltrainingtype,
+    //         additionaltraininghours: additionaltraininghours,
+    //         retired: retired,
+    //         inactive: inactive,
+    //         officerid: officerid,
+    //         issuedequipment: issuedequipment,
+    //         lastrangedate: lastrangedate
+    //     });
+    //     $.ajax({
+    //         url: '/home/AddNewShooter',
+    //         type: 'POST',
+    //         data: {
+    //             // shooterId: id,
+    //             shooterName: name,
+    //             shooterCID: cid,
+    //             shooterTeam: team,
+    //             shooterDivision: division,
+    //             shooterGunInformation: guninformation,
+    //             shooterQualificationsTraining: qualificationstraining,
+    //             shooterAdditionalTrainingType: additionaltrainingtype,
+    //             shooterAdditionalTrainingHours: additionaltraininghours,
+    //             shooterIsRetired: retired,
+    //             shooterIsActive: inactive,
+    //             shooterOfficerId: officerid,
+    //             shooterIssuedEquipment: issuedequipment,
+    //             shooterLastRangeDate: lastrangedate
+
+    //         },
+    //         success: function (response) {
+    //             // Handle success response
+
+    //             console.log(response);
+
+    //             $('#addShooterModal').hide();
+
+    //             location.reload(); // Reload the page after successful update
+
+    //             // Optionally, close the modal or show a success message
+    //         },
+    //         error: function (xhr, status, error) {
+    //             // Handle error response
+    //             console.error(xhr.responseText);
+    //             // Optionally, show an error message
+    //         }
+    //     });
+
+
+
     // DELETE BUTTON FUNCTIONALITY START > > >
     $('.delete-button').on('click', function () {
         var inventoryId = $(this).data('id');
+        $('#inventoryId').val(inventoryId);
         console.log("inventoryId:", inventoryId);
-        $.ajax({
-            url: '/home/GetInventory',
-            type: 'GET',
-            data: { id: inventoryId },
-            success: function (response) {
-                console.log("Response:", response);
+        $('#deleteModal').show();
 
-                // Populate modal with shooter data
-                $('#inventoryId').val(response.id)
-
-                $('#inventoryName').val(response.name);
-                $('#inventoryOfficerId').val(response.officerid);
-                $('#inventoryGunInformation').val(response.guninformation);
-                $('#inventoryAdditionalEquipment').val(response.additionalequipment);
-
-
-                // Show the modal after populating data
-                $('#deleteModal').show();
-
-                // Logging the values (optional)
-
-            },
-            error: function (xhr, status, error) {
-                console.error(xhr.responseText);
-            }
-        });
     });
 
     $('#deleteYesButton').on('click', function () {
-
         var id = $('#inventoryId').val(); // Include shooter ID for identification <hidden value>
         console.log("Inventory ID:", id);
-
-
         //for debugging
         console.log('Values to DELETE:', {
             inventoryId: id,
-
         });
-
+       
         $.ajax({
             url: '/home/DeleteInventory',
             type: 'POST',
             data: {
                 inventoryId: id,
-
             },
             success: function (response) {
                 console.log(response);
                 $('#deleteModal').hide();
-
-                // location.reload(); // Reload the page after successful update
-
+                location.reload(); // Reload the page after successful update
             },
             error: function (xhr, status, error) {
                 console.error(xhr.responseText);
@@ -216,6 +332,9 @@
     // DELETE BUTTON FUNCTIONALITY END > > >
     var deleteModal = document.getElementById('deleteModal');
     var closeDeleteModalButton = deleteModal.querySelector('.close');
+
+    var addInventoryModal = document.getElementById('addInventoryModal');
+    var closeAddInventoryModalButton = addInventoryModal.querySelector('.close');
     // When the user clicks on the close button in editModal, close the modal
     // closeEditModalButton.onclick = function () {
     //     editModal.style.display = "none";
@@ -224,6 +343,9 @@
     closeDeleteModalButton.onclick = function () {
         deleteModal.style.display = "none";
     };
+        closeAddInventoryModalButton.onclick = function () {
+            addInventoryModal.style.display = "none";
+        };
 </script>
 
 
